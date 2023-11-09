@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="286" pageHeight="425" whenNoDataType="AllSectionsNoDetail" columnWidth="246" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2b1ee5d2-3845-4b6b-be9e-e0f27a1e3908">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="data_parameter" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     product.`id` AS prod_id,
+     product.`customer_id` AS product_customer_id,
+     product.`product_id` AS product_product_id,
+     product.`product_name` AS product_product_name,
+     product.`type` AS product_type,
+     product.`price` AS product_price,
+     product.`quantity` AS product_quantity,
+     product.`date` AS product_date,
+     product_info.`id` AS product_info_id,
+     product_info.`customer_id` AS product_info_customer_id,
+     product_info.`total` AS product_info_total,
+     product_info.`date` AS product_info_date
+FROM
+     `product` product INNER JOIN
+     `product_info` product_info ON product.`customer_id` = product_info.`customer_id` WHERE product_info.`customer_id` = $P{data_parameter}]]>
+	</queryString>
+	<field name="prod_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[prod_id]]></fieldDescription>
+	</field>
+	<field name="product_customer_id" class="java.lang.Integer"/>
+	<field name="product_product_id" class="java.lang.String"/>
+	<field name="product_product_name" class="java.lang.String"/>
+	<field name="product_type" class="java.lang.String"/>
+	<field name="product_price" class="java.lang.Double"/>
+	<field name="product_quantity" class="java.lang.Integer"/>
+	<field name="product_date" class="java.sql.Date"/>
+	<field name="product_info_id" class="java.lang.Integer"/>
+	<field name="product_info_customer_id" class="java.lang.Integer"/>
+	<field name="product_info_total" class="java.lang.Double"/>
+	<field name="product_info_date" class="java.sql.Date"/>
+	<group name="total">
+		<groupFooter>
+			<band height="50">
+				<staticText>
+					<reportElement x="150" y="16" width="45" height="20" uuid="92297ff0-25e7-4c92-be0d-c75b3d35fafd"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total: $]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="195" y="16" width="51" height="20" uuid="072c87fa-1225-49ef-b978-0ab19d95a378"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{product_info_total}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<textField>
+				<reportElement x="214" y="0" width="32" height="22" uuid="350cf3b3-c394-48c9-acd7-fa2c42b85115"/>
+				<textFieldExpression><![CDATA[$F{product_customer_id}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="169" y="0" width="45" height="22" uuid="0485a6d4-81d0-48e5-a120-9f5683154771"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cust #:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="33" width="246" height="34" uuid="b9476994-b3dd-450d-ac76-19f94cb0ead9"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[The Eatery Restuarant]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="60" splitType="Stretch">
+			<staticText>
+				<reportElement x="32" y="24" width="57" height="20" uuid="812d31a8-5330-4fa5-a121-2045773846dd"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Item]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="89" y="24" width="70" height="20" uuid="fef7148e-94f4-40e7-ab81-cf8aabe4fbe8"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Quantity]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="159" y="24" width="65" height="20" uuid="a509d8eb-32f6-488d-87ba-77c0dabcba19"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Price]]></text>
+			</staticText>
+			<line>
+				<reportElement x="21" y="12" width="212" height="1" uuid="34b7cfd6-2867-4ec8-accd-7ac57f00b55d"/>
+			</line>
+			<line>
+				<reportElement x="21" y="55" width="212" height="1" uuid="dc5da320-212c-4b07-8575-938385246a2d"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="32" splitType="Stretch">
+			<textField>
+				<reportElement x="21" y="0" width="68" height="24" uuid="d29f531c-9169-4e47-acf8-b62248b0997b"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{product_product_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="89" y="0" width="70" height="24" uuid="40ae031e-cdf8-44d6-8c6c-38d52b663bbe"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{product_quantity}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="159" y="0" width="65" height="24" uuid="992487fb-e034-4233-bae8-0bca8c407f15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{product_price}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
